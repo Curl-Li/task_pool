@@ -13,10 +13,13 @@ func TestPool(t *testing.T) {
 	for i := 0; i < 1000; i++ {
 		var sleepTime time.Duration
 		if i < 100 {
+			// 大洪峰
 			sleepTime = time.Duration(i) * time.Millisecond
 		} else if i > 800 {
+			// 这里大于800时主要模拟洪峰已过 测试缩容
 			sleepTime = 300 * time.Millisecond
 		} else {
+			// 小洪峰
 			sleepTime = 100 * time.Millisecond
 		}
 		time.Sleep(sleepTime)
